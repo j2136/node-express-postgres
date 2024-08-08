@@ -1,8 +1,53 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #e9ecef; /* 背景色を少し明るく */
 }
 
 a {
-  color: #00B7FF;
+  color: #007bff; /* リンクの色を少し濃く */
 }
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ボックスシャドウを追加 */
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #495057; /* 見出しの色を少し濃く */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.btn-primary {
+  background-color: #0069d9; /* ボタンの色を少し濃く */
+  border-color: #0062cc;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group-item span {
+  flex-grow: 1;
+}
+
+.completed {
+  text-decoration: line-through; /* 取り消し線 */
+}
+
+

@@ -27,11 +27,21 @@ h2 {
 }
 
 .btn-primary {
-  background-color: #0069d9; /* ボタンの色を少し濃く */
-  border-color: #0062cc;
+  background-color: #6c757d; /* ボタンの色を優しく */
+  border-color: #6c757d;
 }
 
 .btn-primary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.btn-secondary {
+  background-color: #007bff; /* 検索ボタンの色 */
+  border-color: #007bff;
+}
+
+.btn-secondary:hover {
   background-color: #0056b3;
   border-color: #004085;
 }
@@ -49,5 +59,3 @@ h2 {
 .completed {
   text-decoration: line-through; /* 取り消し線 */
 }
-
-

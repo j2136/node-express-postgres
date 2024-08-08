@@ -1,19 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-  <form action="/" method="post">
-    <label>タスクの追加</label>
-    <input required type="text" name="add" placeholder="何をする?"/>
-    <input type="submit" value="追加"/>
-  </form>
-  <ul>
-    <% for(let todo of todos){ %>
-      <li><span><%= todo.content %></span></li>
-    <% } %>
-  </ul>
-  </body>
+<head>
+  <title>ToDo App</title>
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <%- include('./error_messages'); %>
+  <% if(isAuth) { %>
+    <h2>過程は問題じゃあない 敗けたやつが『悪』なのだ by 花京院典明</h2>
+    <div class="d-flex justify-content-between mb-3">
+      <form action="/" method="post" class="form-inline">
+        <div class="form-group mr-2">
+          <label for="addTask" class="sr-only">タスクの追加</label>
+          <input required type="text" name="add" id="addTask" placeholder="何をする?" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">追加ッ!!</button>
+      </form>
+      <form action="/" method="get" class="form-inline">
+        <input type="text" name="search" placeholder="検索キーワード" class="form-control mr-2">
+        <button type="submit" class="btn btn-secondary">検索</button>
+      </form>
+    </div>
+    <ul class="list-group mt-3">
+      <% for(let todo of todos){ %>
+        <li class="list-group-item <%= todo.completed ? 'completed' : '' %>">
+          <span><%= todo.content %></span>
+          <button onclick="editTask(<%= todo.id %>, '<%= todo.content %>')" class="btn btn-warning btn-sm float-right">編集</button>
+          <button onclick="completeTask(this)" class="btn btn-success btn-sm float-right">完了</button>
+          <form action="/delete/<%= todo.id %>" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm float-right">削除</button>
+          </form>
+        </li>
+      <% } %>
+    </ul>
+    <!-- 編集用のモーダル -->
+    <div id="editModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">タスクの編集</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editForm" action="/edit" method="post">
+              <input type="hidden" name="id" id="editTaskId">
+              <div class="form-group">
+                <label for="editTaskContent">タスク内容</label>
+                <input type="text" class="form-control" id="editTaskContent" name="content" required>
+              </div>
+              <button type="submit" class="btn btn-primary">保存</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } else { %>
+    <h1>Welcome to the TodoApp</h1>
+    <a href="/signup" class="btn btn-primary">Sign up now!</a>
+  <% } %>
+</div>
+<script>
+  function completeTask(button) {
+    const listItem = button.parentElement;
+    listItem.classList.toggle('completed');
+  }
+
+  function editTask(id, content) {
+    document.getElementById('editTaskId').value = id;
+    document.getElementById('editTaskContent').value = content;
+    $('#editModal').modal('show');
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
+

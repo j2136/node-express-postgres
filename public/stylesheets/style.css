@@ -46,4 +46,8 @@ h2 {
   flex-grow: 1;
 }
 
+.completed {
+  text-decoration: line-through; /* 取り消し線 */
+}
+
 

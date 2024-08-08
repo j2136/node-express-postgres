@@ -3,23 +3,29 @@
 <head>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/style.css'/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%- include('./error_messages'); %>
-<% if(isAuth) { %>
-  <form action="/" method="post">
-    <label>タスクの追加</label>
-    <input required type="text" name="add" placeholder="何をする?"/>
-    <input type="submit" value="追加"/>
-  </form>
-  <ul>
-    <% for(let todo of todos){ %>
-      <li><span><%= todo.content %></span></li>
-    <% } %>
-  </ul>
-<% } else { %>
-  <h1>Welcome to the TodoApp</h1>
-  <a href="/signup">Sign up now!</a>
-<% } %>
+<div class="container mt-5">
+  <%- include('./error_messages'); %>
+  <% if(isAuth) { %>
+    <h2>タスクの追加</h2>
+    <form action="/" method="post">
+      <div class="form-group">
+        <label>タスクの追加</label>
+        <input required type="text" name="add" placeholder="何をする?" class="form-control"/>
+      </div>
+      <button type="submit" class="btn btn-primary">追加</button>
+    </form>
+    <ul class="list-group mt-3">
+      <% for(let todo of todos){ %>
+        <li class="list-group-item"><span><%= todo.content %></span></li>
+      <% } %>
+    </ul>
+  <% } else { %>
+    <h1>Welcome to the TodoApp</h1>
+    <a href="/signup" class="btn btn-primary">Sign up now!</a>
+  <% } %>
+</div>
 </body>
 </html>
